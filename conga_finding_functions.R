@@ -211,7 +211,7 @@ plot_expected <- function(df){
   ifelse(diff>0, ex <- df$ex_c, ex <-df$ex_p)
   ifelse(diff>0, print("assuming clustered distribution", sep = "\n"), print("assuming random distribution", sep = "\n"))
   
-  plot(values ~ rs, type = "n", xlab = "r (mm)", ylab = "Number of congas", data = d)
+  plot(values ~ rs, type = "n", xlab = "r (mm)", ylab = "Number of congas", data = df)
   lines(values ~ rs, col = "skyblue", data = df)
   lines(ex ~ df$rs, col = "red")
   #legend("bottomright", legend = c("Actual", "Expected"), lty = 1, col = c("skyblue", "red"))
