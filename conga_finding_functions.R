@@ -164,22 +164,22 @@ compare_congas <- function(pp, theta){
   mu <- unname(t$mu)
   sigma <- unname(t$clustpar[2])
   int <- intensity(pp)
-  n <- int*A
+  
   
   #Expected congas - clustered distribution
   expected_clustered <- function(r, theta, A, kappa, mu, sigma){
-    ex <- theta * A * kappa^3 * mu * (mu - 1) * (mu - 2)/180 *(pi * r^2 + (1-exp(-(r^2)/(4*sigma^2)))/kappa)^2
+    ex <- theta * A * kappa^3 * mu^3/360 *(pi * r^2 + (1-exp(-(r^2)/(4*sigma^2)))/kappa)^2
     return(ex)
   }
   
   ex_c <- unlist(lapply(rs, expected_clustered, theta = theta, A = A, kappa = kappa, mu = mu, sigma = sigma))
   
   #Expected congas - random distribution
-  expected_poisson <-function(r, theta, n, A){
-    (theta/180)*pi^2*r^4*(n*(n-1)/A)*(n/(2*A))
+  expected_poisson <-function(r, theta, lambda, A){
+    (theta * pi^2 * r^4 *lambda^3 * A)/360
   }
   
-  ex_p <- unlist(lapply(rs, expected_poisson, theta = theta, n = n, A = A))
+  ex_p <- unlist(lapply(rs, expected_poisson, theta = theta, lambda = int, A = A))
   
   
   #calculate probability and add column to dataframe
@@ -214,6 +214,7 @@ plot_expected <- function(df){
   plot(values ~ rs, type = "n", xlab = "r (mm)", ylab = "Number of congas", data = df)
   lines(values ~ rs, col = "skyblue", data = df)
   lines(ex ~ df$rs, col = "red")
+  #lines(ex_p ~ rs, col = "orange", data = df)
   #legend("bottomright", legend = c("Actual", "Expected"), lty = 1, col = c("skyblue", "red"))
 }
 

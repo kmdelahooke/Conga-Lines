@@ -1,6 +1,7 @@
 ##FINDING CONGA LINES ON MULTIPLE SURFACES
 
 #depends on 'conga_finding_functions.R'
+# source("./conga_finding_functions.R")
 
 #workflow given folder of .csvs of surface markups
 
@@ -77,8 +78,6 @@ for(i in 1:length(surface_data)){
   point_patterns[[i]] <- ppp(surface_data[[i]]$x, surface_data[[i]]$y, window = windows[[i]])
 }
 
-lapply(point_patterns, plot)
-
 #-----------------------------------------------------------------------------------------------
 # (4) Find conga lines
 #-----------------------------------------------------------------------------------------------
@@ -108,8 +107,15 @@ get_df <- function(filename){
 
 cf <- lapply(filelist, get_df)
 
+
+#view goodness of fit
+for(i in 1:16){
+  print(cf[[i]]$pd_p[1])
+}
+
 #plot results
 par(mfrow = c(4,4))
 lapply(cf, plot_expected)
 lapply(cf, plot_probability)
+
 
