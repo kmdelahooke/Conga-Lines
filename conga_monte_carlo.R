@@ -141,8 +141,9 @@ expected_poisson <- function(theta, r, lambda, A){
 }
 
 A <- area(h5$window)
-l <- 0.00014
+l <- 0.00014 # control parameter
 
+# Plot
 par(mfrow = c(1,3))
 
 #lambda
@@ -150,7 +151,7 @@ lambda <- c(0.00001, 0.00005, 0.0001, 0.00015)
 ex_l <- as.numeric(unlist(expected_congas[9:12])) #numeric
 
 l2 <- seq(0.00001, 0.00015, 1/A)
-lp <- expected_poisson(30,15, l2, A) #analytic
+lp <- expected_poisson(30, 15, l2, A) #analytic
 
 plot(ex_l ~ lambda, xlab = "intensity", ylab = "E(x)" )
 lines(lp ~  l2, col = "red")
@@ -175,7 +176,7 @@ rp <- expected_poisson(30, r2, l, A)
 plot(ex_r ~ r, xlab = "r (mm)", ylab = "E(x)" )
 lines(rp ~ r2, col = "skyblue" )
 
-par(mfrow = c(1,3))
+
 ## B. TC distribution
 #----------------------------
 
