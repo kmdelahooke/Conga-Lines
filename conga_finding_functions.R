@@ -88,7 +88,7 @@ congas <- function (pp, r, theta){
 n_conga <- function(coords){
   ifelse(is.null(nrow(coords)), return(0), {
     
-    coords <- data.frame(coords[-1, ])
+    coords <- coords[-1, ]
     
     #remove rows of x-coords which contain the same x-coords as other rows
     for(i in seq_len(nrow(coords))){
