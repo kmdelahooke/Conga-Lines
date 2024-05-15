@@ -236,8 +236,8 @@ plot_probability <- function(df){
   more <- subset(df, values > ex)
   less <- subset(df, ex > values)
   
-  #calculate values between you get more or less congas than expected
-  sig_m <- subset(more, p < 0.05)
+  #calculate values between you get more or less congas than expected - the results stand when p < 0.001 is used
+  sig_m <- subset(more, p < 0.05) 
   sig_l <- subset(less, p < 0.05)
   
   #print ranges where significant difference
